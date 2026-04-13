@@ -143,8 +143,7 @@ footer {
 <body>
 
 <header>
-  <h1>Agence Web</h1>
-  <span>Restaurants</span>
+  <h1>WeebyNice</h1>
 </header>
 
 <section class="hero">
@@ -199,7 +198,7 @@ footer {
 
 <section class="section" id="contact">
   <h2>Nous contacter</h2>
-  <p>Expliquez-nous votre besoin — réponse rapide.</p>
+  <p>Expliquez-nous votre besoin — réponse rapide sous 24h.</p>
 
   <form onsubmit="sendMessage(event)" style="margin-top:20px; display:flex; flex-direction:column; gap:12px;">
     <input type="text" placeholder="Nom" required style="padding:14px; border-radius:12px; border:1px solid #eee; font-size:16px;">
@@ -254,6 +253,38 @@ function sendMessage(e){
 <script>
 function scrollToSection(id) {
   document.getElementById(id).scrollIntoView({behavior:'smooth'});
+}
+</script>
+
+
+
+<!-- EMAILJS -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+(function(){
+  emailjs.init("0XHZDgB2LONTexkVg");
+})();
+
+function sendMessage(e){
+  e.preventDefault();
+
+  const form = e.target;
+
+  const data = {
+    name: form[0].value,
+    email: form[1].value,
+    phone: form[2].value,
+    message: form[3].value
+  };
+
+  emailjs.send("service_WeebyNice","template_f1go5y6", data)
+  .then(() => {
+    alert("Message envoyé ✔️ Je vous recontacte rapidement");
+    form.reset();
+  })
+  .catch(() => {
+    alert("Erreur, réessayez");
+  });
 }
 </script>
 
